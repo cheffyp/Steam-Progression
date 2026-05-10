@@ -1,0 +1,22 @@
+[Unit]
+Description=Steam Progression Tracker
+After=network.target
+
+[Service]
+Type=simple
+User=admin
+WorkingDirectory=/home/admin/Steam Progression
+EnvironmentFile=/etc/steam-progression.env
+Environment="PORT=3001"
+# Optional: enable HTTPS by pointing to your TLS cert/key
+# Environment="HTTPS_PORT=3444"
+# Environment="TLS_CERT=/path/to/cert.pem"
+# Environment="TLS_KEY=/path/to/key.pem"
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

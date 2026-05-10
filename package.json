@@ -1,0 +1,15 @@
+{
+  "name": "steam-progression",
+  "version": "1.0.0",
+  "description": "Steam game library tracker with completion tracking and random picker, hosted on Raspberry Pi",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

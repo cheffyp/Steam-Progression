@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Progression</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #1b2838;
+      --bg2:         #2a475e;
+      --bg3:         #1e3448;
+      --card:        #16202d;
+      --accent:      #66c0f4;
+      --accent2:     #4fa3d4;
+      --green:       #4caf50;
+      --green2:      #388e3c;
+      --text:        #c6d4df;
+      --text2:       #8ba0b4;
+      --border:      #2d4663;
+      --orange:      #ffb74d;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      background: var(--card);
+      border-bottom: 2px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .header h1 { color: var(--accent); font-size: 1.3rem; flex: 1; }
+    .header-sync { color: var(--text2); font-size: 0.78rem; }
+
+    /* ---- Stats bar ---- */
+    .stats-bar {
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .stat { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+    .stat-value { font-size: 1.35rem; font-weight: 700; color: var(--accent); }
+    .stat-value.green  { color: var(--green); }
+    .stat-value.orange { color: var(--orange); }
+    .stat-label { font-size: 0.68rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ---- Tabs ---- */
+    .tabs {
+      display: flex;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+    .tab {
+      padding: 11px 24px;
+      cursor: pointer;
+      color: var(--text2);
+      border-bottom: 3px solid transparent;
+      font-size: 0.9rem;
+      transition: color 0.15s, border-color 0.15s;
+      user-select: none;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .tab-content { display: none; padding: 16px 20px; }
+    .tab-content.active { display: block; }
+
+    /* ---- Buttons ---- */
+    .btn {
+      background: var(--accent);
+      border: none;
+      border-radius: 4px;
+      color: #1b2838;
+      padding: 7px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .btn:hover { background: var(--accent2); }
+    .btn:disabled { background: var(--border); color: var(--text2); cursor: not-allowed; }
+    .btn-sm { padding: 4px 10px; font-size: 0.78rem; }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-green:hover { background: var(--green2); }
+    .btn-red { background: #a33; color: #fff; }
+    .btn-red:hover { background: #c44; }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+    .btn-outline:hover { background: var(--accent); color: #1b2838; }
+    .btn-ghost {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ---- Filters ---- */
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .search-input {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      padding: 7px 12px;
+      font-size: 0.88rem;
+      flex: 1;
+      min-width: 180px;
+      outline: none;
+    }
+    .search-input:focus { border-color: var(--accent); }
+    .search-input::placeholder { color: var(--text2); }
+
+    .filter-group { display: flex; gap: 4px; flex-wrap: wrap; }
+    .filter-btn {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text2);
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      transition: all 0.12s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { color: var(--text); border-color: var(--accent2); }
+    .filter-btn.active { background: var(--accent); color: #1b2838; border-color: var(--accent); font-weight: 600; }
+
+    select.filter-select {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      outline: none;
+    }
+    select.filter-select:focus { border-color: var(--accent); }
+
+    /* ---- Scan progress ---- */
+    .scan-progress {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      display: none;
+    }
+    .scan-progress.visible { display: block; }
+    .scan-progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+    .scan-bar { height: 4px; background: var(--bg2); border-radius: 2px; overflow: hidden; }
+    .scan-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s; }
+
+    /* ---- Game grid ---- */
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
+    .game-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .game-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+    .game-card.completed  { border-color: var(--green); }
+    .game-card.in-progress { border-color: var(--orange); }
+
+    .game-cover-wrap { position: relative; }
+    .game-cover {
+      width: 100%;
+      aspect-ratio: 460 / 215;
+      object-fit: cover;
+      display: block;
+      background: var(--bg2);
+    }
+    .game-cover-placeholder {
+      width: 100%;
+      aspect-ratio: 460 / 215;
+      background: var(--bg2);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      color: var(--text2);
+      font-size: 0.75rem;
+      text-align: center;
+    }
+
+    .game-info { padding: 9px 10px; }
+    .game-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .game-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 7px;
+    }
+    .game-playtime { font-size: 0.73rem; color: var(--text2); }
+    .game-status {
+      font-size: 0.68rem;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .s-completed   { background: #1b4d1e; color: var(--green); }
+    .s-in-progress { background: #4d3000; color: var(--orange); }
+    .s-not-started { background: var(--bg2); color: var(--text2); }
+
+    .ach-bar { height: 3px; background: var(--bg2); border-radius: 2px; margin-bottom: 5px; overflow: hidden; }
+    .ach-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+    .ach-bar-fill.done { background: var(--green); }
+    .ach-text { font-size: 0.7rem; color: var(--text2); margin-bottom: 7px; }
+
+    .game-actions { display: flex; gap: 4px; }
+
+    /* ---- Alert ---- */
+    .alert {
+      padding: 9px 14px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      font-size: 0.88rem;
+    }
+    .alert-error   { background: #4d1a1a; border: 1px solid #a33; color: #ff9a9a; }
+    .alert-success { background: #1a4d1e; border: 1px solid #3a3; color: #9aff9e; }
+    .alert-info    { background: #1a3a4d; border: 1px solid #36a; color: #9acfff; }
+
+    /* ---- Empty state ---- */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text2);
+      grid-column: 1 / -1;
+    }
+    .empty-state h2 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
+    .empty-state p  { margin-bottom: 16px; font-size: 0.9rem; }
+
+    /* ---- Random Picker ---- */
+    .picker-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    .picker-panel h3 { color: var(--accent); font-size: 0.95rem; margin-bottom: 14px; }
+
+    .picker-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .picker-row label { font-size: 0.82rem; color: var(--text2); min-width: 90px; }
+    .picker-row input[type="number"] {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      padding: 5px 8px;
+      font-size: 0.82rem;
+      width: 72px;
+      outline: none;
+    }
+    .picker-row input:focus { border-color: var(--accent); }
+
+    .pick-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      margin-bottom: 14px;
+    }
+
+    .pick-eligible {
+      text-align: center;
+      color: var(--text2);
+      font-size: 0.82rem;
+      margin-bottom: 12px;
+    }
+
+    .pick-result {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: none;
+    }
+    .pick-result.visible { display: block; }
+    .pick-cover {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+    .pick-info { padding: 18px 20px; }
+    .pick-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+    .pick-meta { color: var(--text2); font-size: 0.88rem; margin-bottom: 14px; display: flex; gap: 18px; flex-wrap: wrap; }
+    .pick-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    @media (max-width: 560px) {
+      .game-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .stats-bar { gap: 16px; }
+      .header h1 { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>Steam Progression</h1>
+  <span class="header-sync" id="lastSynced">Not synced</span>
+  <button class="btn" id="syncBtn" onclick="syncLibrary()">Sync Library</button>
+  <button class="btn btn-ghost btn-sm" id="scanBtn" onclick="startScan()">Scan Achievements</button>
+  <button class="btn btn-red btn-sm" id="stopScanBtn" style="display:none" onclick="stopScan()">Stop Scan</button>
+</div>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-value" id="sTotal">—</span><span class="stat-label">Total</span></div>
+  <div class="stat"><span class="stat-value green" id="sCompleted">—</span><span class="stat-label">Completed</span></div>
+  <div class="stat"><span class="stat-value orange" id="sInProgress">—</span><span class="stat-label">In Progress</span></div>
+  <div class="stat"><span class="stat-value" id="sNotStarted">—</span><span class="stat-label">Not Started</span></div>
+  <div class="stat"><span class="stat-value" id="sScanned">—</span><span class="stat-label">Achievements Scanned</span></div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('library')">Library</div>
+  <div class="tab" onclick="switchTab('picker')">Random Picker</div>
+</div>
+
+<!-- Library tab -->
+<div id="tab-library" class="tab-content active">
+  <div id="alertBox"></div>
+
+  <div class="scan-progress" id="scanProgress">
+    <div class="scan-progress-header">
+      <span>Scanning achievements… <span id="scanCurrent" style="color:var(--text2);font-size:0.78rem"></span></span>
+      <span id="scanCount" style="color:var(--text2);font-size:0.82rem"></span>
+    </div>
+    <div class="scan-bar"><div class="scan-bar-fill" id="scanFill" style="width:0%"></div></div>
+  </div>
+
+  <div class="filters">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search games…" oninput="applyFilters()">
+    <div class="filter-group" id="statusFilter">
+      <button class="filter-btn active" data-s="all"         onclick="setStatusFilter('all')">All</button>
+      <button class="filter-btn"        data-s="not_started" onclick="setStatusFilter('not_started')">Not Started</button>
+      <button class="filter-btn"        data-s="in_progress" onclick="setStatusFilter('in_progress')">In Progress</button>
+      <button class="filter-btn"        data-s="completed"   onclick="setStatusFilter('completed')">Completed</button>
+    </div>
+    <select class="filter-select" id="sortSelect" onchange="applyFilters()">
+      <option value="name">Sort: Name</option>
+      <option value="playtime_desc">Sort: Most Played</option>
+      <option value="playtime_asc">Sort: Least Played</option>
+      <option value="ach_desc">Sort: Achievement %</option>
+    </select>
+  </div>
+
+  <div class="game-grid" id="gameGrid"></div>
+</div>
+
+<!-- Random Picker tab -->
+<div id="tab-picker" class="tab-content">
+  <div class="picker-panel">
+    <h3>Filters</h3>
+
+    <div class="picker-row">
+      <label>Status</label>
+      <div class="filter-group" id="pickerStatus">
+        <button class="filter-btn active" data-v="uncompleted"  onclick="setPF('status','uncompleted')">Any Uncompleted</button>
+        <button class="filter-btn"        data-v="not_started"  onclick="setPF('status','not_started')">Not Started</button>
+        <button class="filter-btn"        data-v="in_progress"  onclick="setPF('status','in_progress')">In Progress</button>
+      </div>
+    </div>
+
+    <div class="picker-row">
+      <label>Playtime</label>
+      <span style="font-size:0.82rem;color:var(--text2)">Min</span>
+      <input type="number" id="minPt" placeholder="0" min="0" step="0.5">
+      <span style="font-size:0.82rem;color:var(--text2)">Max</span>
+      <input type="number" id="maxPt" placeholder="any" min="0" step="0.5">
+      <span style="font-size:0.82rem;color:var(--text2)">hours</span>
+    </div>
+
+    <div class="picker-row">
+      <label>Achievements</label>
+      <div class="filter-group" id="pickerAch">
+        <button class="filter-btn active" data-v="any" onclick="setPF('ach','any')">Any</button>
+        <button class="filter-btn"        data-v="yes" onclick="setPF('ach','yes')">Has Achievements</button>
+        <button class="filter-btn"        data-v="no"  onclick="setPF('ach','no')">No Achievements</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pick-eligible" id="pickEligible"></div>
+  <button class="btn pick-btn" onclick="pickRandom()">Pick a Random Game!</button>
+
+  <div class="pick-result" id="pickResult">
+    <img class="pick-cover" id="pickCover" src="" alt="" onerror="this.style.display='none'">
+    <div class="pick-info">
+      <div class="pick-name" id="pickName"></div>
+      <div class="pick-meta" id="pickMeta"></div>
+      <div class="pick-actions">
+        <button class="btn btn-green" onclick="pickRandom()">Pick Another</button>
+        <button class="btn btn-outline" id="pickComplete" onclick="markPickComplete()">Mark Complete</button>
+        <a class="btn btn-ghost btn-sm" id="pickLink" href="#" target="_blank">Open in Steam</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let allGames = [];
+  let currentStatusFilter = 'all';
+  let pickerFilters = { status: 'uncompleted', ach: 'any' };
+  let pickedGame = null;
+  let scanPoll = null;
+
+  // ---- Tabs ----
+  function switchTab(name) {
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      t.classList.toggle('active', ['library', 'picker'][i] === name);
+    });
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+  }
+
+  // ---- Helpers ----
+  function formatPlaytime(mins) {
+    if (!mins) return 'Never played';
+    if (mins < 60) return mins + ' min';
+    return (mins / 60).toFixed(1) + ' hrs';
+  }
+
+  function gameStatus(g) {
+    if (g.completed) return 'completed';
+    if (g.playtime_forever > 0) return 'in_progress';
+    return 'not_started';
+  }
+
+  function achPct(g) {
+    if (!g.achievements || g.achievements.error || g.achievements.total === 0) return null;
+    return Math.round((g.achievements.unlocked / g.achievements.total) * 100);
+  }
+
+  // ---- Game card ----
+  function cardHTML(g) {
+    const st = gameStatus(g);
+    const pct = achPct(g);
+    const cover = `https://cdn.akamai.steamstatic.com/steam/apps/${g.appid}/header.jpg`;
+
+    const statusLabel = { completed: 'Completed', in_progress: 'In Progress', not_started: 'Not Started' }[st];
+    const statusCls   = { completed: 's-completed', in_progress: 's-in-progress', not_started: 's-not-started' }[st];
+    const cardCls     = { completed: 'completed', in_progress: 'in-progress', not_started: '' }[st];
+
+    let achHTML = '';
+    if (pct !== null) {
+      achHTML = `
+        <div class="ach-bar"><div class="ach-bar-fill ${pct === 100 ? 'done' : ''}" style="width:${pct}%"></div></div>
+        <div class="ach-text">${g.achievements.unlocked}/${g.achievements.total} achievements (${pct}%)</div>`;
+    } else if (g.has_community_visible_stats) {
+      achHTML = `<div class="ach-text">Achievements not yet scanned</div>`;
+    }
+
+    const completeBtn = st === 'completed'
+      ? `<button class="btn btn-red btn-sm" onclick="toggleComplete(${g.appid},false)">Unmark</button>`
+      : `<button class="btn btn-green btn-sm" onclick="toggleComplete(${g.appid},true)">Mark Complete</button>`;
+
+    return `
+      <div class="game-card ${cardCls}" id="card-${g.appid}">
+        <div class="game-cover-wrap">
+          <img class="game-cover" src="${cover}" alt="${g.name}"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="game-cover-placeholder">${g.name}</div>
+        </div>
+        <div class="game-info">
+          <div class="game-name" title="${g.name}">${g.name}</div>
+          <div class="game-meta">
+            <span class="game-playtime">${formatPlaytime(g.playtime_forever)}</span>
+            <span class="game-status ${statusCls}">${statusLabel}</span>
+          </div>
+          ${achHTML}
+          <div class="game-actions">${completeBtn}</div>
+        </div>
+      </div>`;
+  }
+
+  // ---- Status filter ----
+  function setStatusFilter(s) {
+    currentStatusFilter = s;
+    document.querySelectorAll('#statusFilter .filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.s === s);
+    });
+    applyFilters();
+  }
+
+  // ---- Picker filter ----
+  function setPF(type, val) {
+    pickerFilters[type] = val;
+    const id = type === 'status' ? 'pickerStatus' : 'pickerAch';
+    document.querySelectorAll(`#${id} .filter-btn`).forEach(b => {
+      b.classList.toggle('active', b.dataset.v === val);
+    });
+  }
+
+  // ---- Apply filters + sort ----
+  function applyFilters() {
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    const sort   = document.getElementById('sortSelect').value;
+
+    let games = allGames.filter(g => {
+      if (search && !g.name.toLowerCase().includes(search)) return false;
+      const st = gameStatus(g);
+      if (currentStatusFilter !== 'all' && st !== currentStatusFilter) return false;
+      return true;
+    });
+
+    games.sort((a, b) => {
+      if (sort === 'name')         return a.name.localeCompare(b.name);
+      if (sort === 'playtime_desc') return (b.playtime_forever || 0) - (a.playtime_forever || 0);
+      if (sort === 'playtime_asc')  return (a.playtime_forever || 0) - (b.playtime_forever || 0);
+      if (sort === 'ach_desc') {
+        const pa = achPct(a) ?? -1, pb = achPct(b) ?? -1;
+        return pb - pa;
+      }
+      return 0;
+    });
+
+    const grid = document.getElementById('gameGrid');
+    if (games.length === 0) {
+      grid.innerHTML = `<div class="empty-state"><h2>No matches</h2><p>Try adjusting the search or filter.</p></div>`;
+    } else {
+      grid.innerHTML = games.map(cardHTML).join('');
+    }
+  }
+
+  // ---- Stats ----
+  function updateStats() {
+    const total      = allGames.length;
+    const completed  = allGames.filter(g => g.completed).length;
+    const inProgress = allGames.filter(g => !g.completed && g.playtime_forever > 0).length;
+    const notStarted = allGames.filter(g => !g.completed && !g.playtime_forever).length;
+    const scanned    = allGames.filter(g => g.achievements && !g.achievements.error).length;
+
+    document.getElementById('sTotal').textContent      = total;
+    document.getElementById('sCompleted').textContent  = completed;
+    document.getElementById('sInProgress').textContent = inProgress;
+    document.getElementById('sNotStarted').textContent = notStarted;
+    document.getElementById('sScanned').textContent    = total ? `${scanned} / ${total}` : '—';
+  }
+
+  // ---- Load state ----
+  async function loadState() {
+    const res  = await fetch('/api/state');
+    const data = await res.json();
+    allGames   = data.games || [];
+
+    if (data.libraryFetchedAt) {
+      document.getElementById('lastSynced').textContent =
+        'Last synced: ' + new Date(data.libraryFetchedAt).toLocaleString();
+    }
+
+    if (!data.steamConfigured) {
+      showAlert('STEAM_API_KEY and STEAM_ID are not set in the service environment.', 'error');
+    }
+
+    updateStats();
+    applyFilters();
+    updateScanUI(data.scanState);
+  }
+
+  // ---- Sync library ----
+  async function syncLibrary() {
+    const btn = document.getElementById('syncBtn');
+    btn.disabled = true; btn.textContent = 'Syncing…';
+    try {
+      const res  = await fetch('/api/sync', { method: 'POST' });
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error);
+      showAlert(`Library synced — ${data.count} games found.`, 'success');
+      await loadState();
+    } catch (e) {
+      showAlert('Sync failed: ' + e.message, 'error');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Sync Library';
+    }
+  }
+
+  // ---- Toggle complete ----
+  async function toggleComplete(appid, completed) {
+    try {
+      const res  = await fetch('/api/complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ appid, completed })
+      });
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error);
+      await loadState();
+    } catch (e) {
+      showAlert('Error: ' + e.message, 'error');
+    }
+  }
+
+  // ---- Achievement scan ----
+  async function startScan() {
+    const res  = await fetch('/api/scan-achievements', { method: 'POST' });
+    const data = await res.json();
+    if (!data.ok) { showAlert(data.error, 'error'); return; }
+    startScanPoll();
+  }
+
+  async function stopScan() {
+    await fetch('/api/scan-stop', { method: 'POST' });
+    stopScanPoll();
+    await loadState();
+  }
+
+  function startScanPoll() {
+    if (scanPoll) return;
+    scanPoll = setInterval(async () => {
+      const res  = await fetch('/api/scan-progress');
+      const data = await res.json();
+      updateScanUI(data);
+      if (!data.running) { stopScanPoll(); await loadState(); }
+    }, 1000);
+  }
+
+  function stopScanPoll() {
+    if (scanPoll) { clearInterval(scanPoll); scanPoll = null; }
+    document.getElementById('scanProgress').classList.remove('visible');
+    document.getElementById('stopScanBtn').style.display = 'none';
+    document.getElementById('scanBtn').style.display     = '';
+  }
+
+  function updateScanUI(s) {
+    if (!s) return;
+    if (s.running) {
+      document.getElementById('scanProgress').classList.add('visible');
+      document.getElementById('stopScanBtn').style.display = '';
+      document.getElementById('scanBtn').style.display     = 'none';
+      const pct = s.total > 0 ? Math.round(s.done / s.total * 100) : 0;
+      document.getElementById('scanFill').style.width    = pct + '%';
+      document.getElementById('scanCount').textContent   = `${s.done} / ${s.total}`;
+      document.getElementById('scanCurrent').textContent = s.current ? `— ${s.current}` : '';
+      if (!scanPoll) startScanPoll();
+    } else {
+      stopScanPoll();
+    }
+  }
+
+  // ---- Random picker ----
+  async function pickRandom() {
+    const params = new URLSearchParams({ status: pickerFilters.status });
+    const minPt = document.getElementById('minPt').value;
+    const maxPt = document.getElementById('maxPt').value;
+    if (minPt) params.set('minPlaytime', minPt);
+    if (maxPt) params.set('maxPlaytime', maxPt);
+    if (pickerFilters.ach !== 'any') params.set('hasAchievements', pickerFilters.ach);
+
+    const res  = await fetch('/api/random?' + params);
+    const data = await res.json();
+    const el   = document.getElementById('pickResult');
+
+    if (!data.game) {
+      document.getElementById('pickEligible').textContent = 'No games match your filters.';
+      el.classList.remove('visible');
+      return;
+    }
+
+    pickedGame = data.game;
+    document.getElementById('pickEligible').textContent = `${data.totalEligible} eligible games`;
+    document.getElementById('pickCover').src  = `https://cdn.akamai.steamstatic.com/steam/apps/${data.game.appid}/header.jpg`;
+    document.getElementById('pickName').textContent = data.game.name;
+
+    const pct    = achPct(data.game);
+    const achTxt = pct !== null ? `${data.game.achievements.unlocked}/${data.game.achievements.total} achievements (${pct}%)` : '';
+    document.getElementById('pickMeta').innerHTML =
+      `<span>${formatPlaytime(data.game.playtime_forever)}</span>${achTxt ? `<span>${achTxt}</span>` : ''}`;
+
+    document.getElementById('pickLink').href = `steam://store/${data.game.appid}`;
+
+    const completeBtn = document.getElementById('pickComplete');
+    completeBtn.textContent = 'Mark Complete';
+    completeBtn.disabled    = false;
+
+    el.classList.add('visible');
+  }
+
+  async function markPickComplete() {
+    if (!pickedGame) return;
+    await toggleComplete(pickedGame.appid, true);
+    const btn = document.getElementById('pickComplete');
+    btn.textContent = 'Marked!';
+    btn.disabled    = true;
+  }
+
+  // ---- Alert ----
+  function showAlert(msg, type) {
+    const box = document.getElementById('alertBox');
+    box.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+    if (type !== 'error') setTimeout(() => { box.innerHTML = ''; }, 5000);
+  }
+
+  // ---- Init ----
+  loadState().then(() => {
+    if (allGames.length === 0) {
+      document.getElementById('gameGrid').innerHTML = `
+        <div class="empty-state">
+          <h2>No games loaded yet</h2>
+          <p>Click <strong>Sync Library</strong> to pull your Steam library.</p>
+          <button class="btn" onclick="syncLibrary()">Sync Library</button>
+        </div>`;
+    }
+  });
+</script>
+</body>
+</html>
