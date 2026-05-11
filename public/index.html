@@ -8,49 +8,29 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:          #1b2838;
-      --bg2:         #2a475e;
-      --bg3:         #1e3448;
-      --card:        #16202d;
-      --accent:      #66c0f4;
-      --accent2:     #4fa3d4;
-      --green:       #4caf50;
-      --green2:      #388e3c;
-      --text:        #c6d4df;
-      --text2:       #8ba0b4;
-      --border:      #2d4663;
-      --orange:      #ffb74d;
+      --bg:     #1b2838;
+      --bg2:    #2a475e;
+      --bg3:    #1e3448;
+      --card:   #16202d;
+      --accent: #66c0f4;
+      --acc2:   #4fa3d4;
+      --green:  #4caf50;
+      --green2: #388e3c;
+      --text:   #c6d4df;
+      --text2:  #8ba0b4;
+      --border: #2d4663;
+      --orange: #ffb74d;
     }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', Arial, sans-serif;
-      min-height: 100vh;
-    }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Arial, sans-serif; min-height: 100vh; }
 
     /* ---- Header ---- */
-    .header {
-      background: var(--card);
-      border-bottom: 2px solid var(--border);
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+    .header { background: var(--card); border-bottom: 2px solid var(--border); padding: 12px 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .header h1 { color: var(--accent); font-size: 1.3rem; flex: 1; }
     .header-sync { color: var(--text2); font-size: 0.78rem; }
 
-    /* ---- Stats bar ---- */
-    .stats-bar {
-      background: var(--bg3);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 20px;
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
+    /* ---- Stats ---- */
+    .stats-bar { background: var(--bg3); border-bottom: 1px solid var(--border); padding: 10px 20px; display: flex; gap: 28px; flex-wrap: wrap; }
     .stat { display: flex; flex-direction: column; align-items: center; gap: 1px; }
     .stat-value { font-size: 1.35rem; font-weight: 700; color: var(--accent); }
     .stat-value.green  { color: var(--green); }
@@ -58,292 +38,114 @@
     .stat-label { font-size: 0.68rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; }
 
     /* ---- Tabs ---- */
-    .tabs {
-      display: flex;
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
-    }
-    .tab {
-      padding: 11px 24px;
-      cursor: pointer;
-      color: var(--text2);
-      border-bottom: 3px solid transparent;
-      font-size: 0.9rem;
-      transition: color 0.15s, border-color 0.15s;
-      user-select: none;
-    }
+    .tabs { display: flex; background: var(--card); border-bottom: 1px solid var(--border); }
+    .tab { padding: 11px 24px; cursor: pointer; color: var(--text2); border-bottom: 3px solid transparent; font-size: 0.9rem; transition: color 0.15s, border-color 0.15s; user-select: none; }
     .tab:hover { color: var(--text); }
     .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-
     .tab-content { display: none; padding: 16px 20px; }
     .tab-content.active { display: block; }
 
     /* ---- Buttons ---- */
-    .btn {
-      background: var(--accent);
-      border: none;
-      border-radius: 4px;
-      color: #1b2838;
-      padding: 7px 16px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.15s;
-      white-space: nowrap;
-    }
-    .btn:hover { background: var(--accent2); }
+    .btn { background: var(--accent); border: none; border-radius: 4px; color: #1b2838; padding: 7px 16px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
+    .btn:hover { background: var(--acc2); }
     .btn:disabled { background: var(--border); color: var(--text2); cursor: not-allowed; }
     .btn-sm { padding: 4px 10px; font-size: 0.78rem; }
     .btn-green { background: var(--green); color: #fff; }
     .btn-green:hover { background: var(--green2); }
     .btn-red { background: #a33; color: #fff; }
     .btn-red:hover { background: #c44; }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-    }
+    .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
     .btn-outline:hover { background: var(--accent); color: #1b2838; }
-    .btn-ghost {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
+    .btn-ghost { background: var(--bg2); border: 1px solid var(--border); color: var(--text); }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
     /* ---- Filters ---- */
-    .filters {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .search-input {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--text);
-      padding: 7px 12px;
-      font-size: 0.88rem;
-      flex: 1;
-      min-width: 180px;
-      outline: none;
-    }
+    .filters { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
+    .search-input { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 7px 12px; font-size: 0.88rem; flex: 1; min-width: 180px; outline: none; }
     .search-input:focus { border-color: var(--accent); }
     .search-input::placeholder { color: var(--text2); }
-
     .filter-group { display: flex; gap: 4px; flex-wrap: wrap; }
-    .filter-btn {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--text2);
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 0.82rem;
-      transition: all 0.12s;
-      white-space: nowrap;
-    }
-    .filter-btn:hover { color: var(--text); border-color: var(--accent2); }
+    .filter-btn { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; color: var(--text2); padding: 6px 12px; cursor: pointer; font-size: 0.82rem; transition: all 0.12s; white-space: nowrap; }
+    .filter-btn:hover { color: var(--text); border-color: var(--acc2); }
     .filter-btn.active { background: var(--accent); color: #1b2838; border-color: var(--accent); font-weight: 600; }
-
-    select.filter-select {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--text);
-      padding: 6px 10px;
-      font-size: 0.82rem;
-      cursor: pointer;
-      outline: none;
-    }
+    select.filter-select { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 6px 10px; font-size: 0.82rem; cursor: pointer; outline: none; }
     select.filter-select:focus { border-color: var(--accent); }
 
     /* ---- Scan progress ---- */
-    .scan-progress {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 14px;
-      margin-bottom: 14px;
-      display: none;
-    }
+    .scan-progress { background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; display: none; }
     .scan-progress.visible { display: block; }
-    .scan-progress-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      margin-bottom: 6px;
-    }
+    .scan-ph { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; margin-bottom: 6px; }
     .scan-bar { height: 4px; background: var(--bg2); border-radius: 2px; overflow: hidden; }
     .scan-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s; }
 
     /* ---- Game grid ---- */
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 12px;
-    }
-
-    .game-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-      transition: border-color 0.15s, transform 0.15s;
-    }
-    .game-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
-    .game-card.completed  { border-color: var(--green); }
+    .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+    .game-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; transition: border-color 0.15s, transform 0.15s; }
+    .game-card:hover { border-color: var(--acc2); transform: translateY(-2px); }
+    .game-card.completed   { border-color: var(--green); }
     .game-card.in-progress { border-color: var(--orange); }
-
-    .game-cover-wrap { position: relative; }
-    .game-cover {
-      width: 100%;
-      aspect-ratio: 460 / 215;
-      object-fit: cover;
-      display: block;
-      background: var(--bg2);
-    }
-    .game-cover-placeholder {
-      width: 100%;
-      aspect-ratio: 460 / 215;
-      background: var(--bg2);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      color: var(--text2);
-      font-size: 0.75rem;
-      text-align: center;
-    }
-
+    .game-cover { width: 100%; aspect-ratio: 460/215; object-fit: cover; display: block; background: var(--bg2); }
+    .game-cover-placeholder { width: 100%; aspect-ratio: 460/215; background: var(--bg2); display: none; align-items: center; justify-content: center; padding: 10px; color: var(--text2); font-size: 0.75rem; text-align: center; }
     .game-info { padding: 9px 10px; }
-    .game-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .game-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 7px;
-    }
+    .game-name { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .game-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; }
     .game-playtime { font-size: 0.73rem; color: var(--text2); }
-    .game-status {
-      font-size: 0.68rem;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
+    .game-status { font-size: 0.68rem; padding: 2px 6px; border-radius: 3px; font-weight: 600; white-space: nowrap; }
     .s-completed   { background: #1b4d1e; color: var(--green); }
     .s-in-progress { background: #4d3000; color: var(--orange); }
     .s-not-started { background: var(--bg2); color: var(--text2); }
-
     .ach-bar { height: 3px; background: var(--bg2); border-radius: 2px; margin-bottom: 5px; overflow: hidden; }
     .ach-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
     .ach-bar-fill.done { background: var(--green); }
     .ach-text { font-size: 0.7rem; color: var(--text2); margin-bottom: 7px; }
-
     .game-actions { display: flex; gap: 4px; }
 
     /* ---- Alert ---- */
-    .alert {
-      padding: 9px 14px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-      font-size: 0.88rem;
-    }
+    .alert { padding: 9px 14px; border-radius: 4px; margin-bottom: 12px; font-size: 0.88rem; }
     .alert-error   { background: #4d1a1a; border: 1px solid #a33; color: #ff9a9a; }
     .alert-success { background: #1a4d1e; border: 1px solid #3a3; color: #9aff9e; }
-    .alert-info    { background: #1a3a4d; border: 1px solid #36a; color: #9acfff; }
 
     /* ---- Empty state ---- */
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--text2);
-      grid-column: 1 / -1;
-    }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text2); grid-column: 1 / -1; }
     .empty-state h2 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
     .empty-state p  { margin-bottom: 16px; font-size: 0.9rem; }
 
-    /* ---- Random Picker ---- */
-    .picker-panel {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 18px;
-    }
-    .picker-panel h3 { color: var(--accent); font-size: 0.95rem; margin-bottom: 14px; }
+    /* ---- Wheel / Picker ---- */
+    .picker-layout { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+    .picker-sidebar { flex: 1; min-width: 260px; }
+    .picker-center  { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; }
 
-    .picker-row {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .picker-row label { font-size: 0.82rem; color: var(--text2); min-width: 90px; }
-    .picker-row input[type="number"] {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--text);
-      padding: 5px 8px;
-      font-size: 0.82rem;
-      width: 72px;
-      outline: none;
-    }
+    .picker-panel { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; margin-bottom: 14px; }
+    .picker-panel h3 { color: var(--accent); font-size: 0.95rem; margin-bottom: 14px; }
+    .picker-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+    .picker-row label { font-size: 0.82rem; color: var(--text2); min-width: 80px; }
+    .picker-row input[type="number"] { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 5px 8px; font-size: 0.82rem; width: 70px; outline: none; }
     .picker-row input:focus { border-color: var(--accent); }
 
-    .pick-btn {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      font-size: 1.1rem;
-      border-radius: 8px;
-      margin-bottom: 14px;
-    }
+    /* Wheel canvas wrapper */
+    .wheel-wrap { position: relative; }
+    #wheelCanvas { display: block; max-width: 100%; height: auto; }
 
-    .pick-eligible {
-      text-align: center;
-      color: var(--text2);
-      font-size: 0.82rem;
-      margin-bottom: 12px;
-    }
+    /* Spin button */
+    .spin-btn { margin-top: 14px; width: 100%; max-width: 460px; padding: 14px; font-size: 1.15rem; border-radius: 8px; letter-spacing: 0.5px; }
 
-    .pick-result {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      display: none;
-    }
-    .pick-result.visible { display: block; }
-    .pick-cover {
-      width: 100%;
-      max-height: 280px;
-      object-fit: cover;
-      display: block;
-    }
-    .pick-info { padding: 18px 20px; }
-    .pick-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+    .pick-eligible { color: var(--text2); font-size: 0.82rem; margin-bottom: 8px; text-align: center; min-height: 1.2em; }
+
+    /* Result card */
+    .pick-result { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: none; margin-top: 16px; }
+    .pick-result.visible { display: block; animation: fadeUp 0.4s ease; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .pick-cover { width: 100%; max-height: 260px; object-fit: cover; display: block; }
+    .pick-info { padding: 16px 18px; }
+    .pick-name { font-size: 1.35rem; font-weight: 700; margin-bottom: 6px; }
     .pick-meta { color: var(--text2); font-size: 0.88rem; margin-bottom: 14px; display: flex; gap: 18px; flex-wrap: wrap; }
     .pick-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
-    @media (max-width: 560px) {
+    @media (max-width: 600px) {
       .game-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
       .stats-bar { gap: 16px; }
       .header h1 { font-size: 1.1rem; }
+      .picker-center { width: 100%; }
     }
   </style>
 </head>
@@ -370,15 +172,15 @@
 <!-- Tabs -->
 <div class="tabs">
   <div class="tab active" onclick="switchTab('library')">Library</div>
-  <div class="tab" onclick="switchTab('picker')">Random Picker</div>
+  <div class="tab" onclick="switchTab('picker')">Wheel Picker</div>
 </div>
 
-<!-- Library tab -->
+<!-- ===================== LIBRARY TAB ===================== -->
 <div id="tab-library" class="tab-content active">
   <div id="alertBox"></div>
 
   <div class="scan-progress" id="scanProgress">
-    <div class="scan-progress-header">
+    <div class="scan-ph">
       <span>Scanning achievements… <span id="scanCurrent" style="color:var(--text2);font-size:0.78rem"></span></span>
       <span id="scanCount" style="color:var(--text2);font-size:0.82rem"></span>
     </div>
@@ -404,360 +206,739 @@
   <div class="game-grid" id="gameGrid"></div>
 </div>
 
-<!-- Random Picker tab -->
+<!-- ===================== PICKER TAB ===================== -->
 <div id="tab-picker" class="tab-content">
-  <div class="picker-panel">
-    <h3>Filters</h3>
+  <div class="picker-layout">
 
-    <div class="picker-row">
-      <label>Status</label>
-      <div class="filter-group" id="pickerStatus">
-        <button class="filter-btn active" data-v="uncompleted"  onclick="setPF('status','uncompleted')">Any Uncompleted</button>
-        <button class="filter-btn"        data-v="not_started"  onclick="setPF('status','not_started')">Not Started</button>
-        <button class="filter-btn"        data-v="in_progress"  onclick="setPF('status','in_progress')">In Progress</button>
+    <!-- Sidebar: filters + result -->
+    <div class="picker-sidebar">
+      <div class="picker-panel">
+        <h3>Filters</h3>
+        <div class="picker-row">
+          <label>Status</label>
+          <div class="filter-group" id="pickerStatus">
+            <button class="filter-btn active" data-v="uncompleted" onclick="setPF('status','uncompleted')">Any Uncompleted</button>
+            <button class="filter-btn"        data-v="not_started" onclick="setPF('status','not_started')">Not Started</button>
+            <button class="filter-btn"        data-v="in_progress" onclick="setPF('status','in_progress')">In Progress</button>
+          </div>
+        </div>
+        <div class="picker-row">
+          <label>Playtime</label>
+          <span style="font-size:0.82rem;color:var(--text2)">Min</span>
+          <input type="number" id="minPt" placeholder="0" min="0" step="0.5" onchange="updateEligible()">
+          <span style="font-size:0.82rem;color:var(--text2)">Max</span>
+          <input type="number" id="maxPt" placeholder="any" min="0" step="0.5" onchange="updateEligible()">
+          <span style="font-size:0.82rem;color:var(--text2)">hours</span>
+        </div>
+        <div class="picker-row">
+          <label>Achievements</label>
+          <div class="filter-group" id="pickerAch">
+            <button class="filter-btn active" data-v="any" onclick="setPF('ach','any')">Any</button>
+            <button class="filter-btn"        data-v="yes" onclick="setPF('ach','yes')">Has Achievements</button>
+            <button class="filter-btn"        data-v="no"  onclick="setPF('ach','no')">No Achievements</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result card appears here -->
+      <div class="pick-result" id="pickResult">
+        <img class="pick-cover" id="pickCover" src="" alt="" onerror="this.style.display='none'">
+        <div class="pick-info">
+          <div class="pick-name" id="pickName"></div>
+          <div class="pick-meta" id="pickMeta"></div>
+          <div class="pick-actions">
+            <button class="btn btn-green" onclick="triggerSpin()">Spin Again</button>
+            <button class="btn btn-outline" id="pickComplete" onclick="markPickComplete()">Mark Complete</button>
+            <a class="btn btn-ghost btn-sm" id="pickLink" href="#" target="_blank">Open in Steam</a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="picker-row">
-      <label>Playtime</label>
-      <span style="font-size:0.82rem;color:var(--text2)">Min</span>
-      <input type="number" id="minPt" placeholder="0" min="0" step="0.5">
-      <span style="font-size:0.82rem;color:var(--text2)">Max</span>
-      <input type="number" id="maxPt" placeholder="any" min="0" step="0.5">
-      <span style="font-size:0.82rem;color:var(--text2)">hours</span>
-    </div>
-
-    <div class="picker-row">
-      <label>Achievements</label>
-      <div class="filter-group" id="pickerAch">
-        <button class="filter-btn active" data-v="any" onclick="setPF('ach','any')">Any</button>
-        <button class="filter-btn"        data-v="yes" onclick="setPF('ach','yes')">Has Achievements</button>
-        <button class="filter-btn"        data-v="no"  onclick="setPF('ach','no')">No Achievements</button>
+    <!-- Center: wheel + spin button -->
+    <div class="picker-center">
+      <div class="pick-eligible" id="pickEligible"></div>
+      <div class="wheel-wrap">
+        <canvas id="wheelCanvas" width="460" height="460"></canvas>
       </div>
+      <button class="btn spin-btn" id="spinBtn" onclick="triggerSpin()">Spin the Wheel!</button>
     </div>
-  </div>
 
-  <div class="pick-eligible" id="pickEligible"></div>
-  <button class="btn pick-btn" onclick="pickRandom()">Pick a Random Game!</button>
-
-  <div class="pick-result" id="pickResult">
-    <img class="pick-cover" id="pickCover" src="" alt="" onerror="this.style.display='none'">
-    <div class="pick-info">
-      <div class="pick-name" id="pickName"></div>
-      <div class="pick-meta" id="pickMeta"></div>
-      <div class="pick-actions">
-        <button class="btn btn-green" onclick="pickRandom()">Pick Another</button>
-        <button class="btn btn-outline" id="pickComplete" onclick="markPickComplete()">Mark Complete</button>
-        <a class="btn btn-ghost btn-sm" id="pickLink" href="#" target="_blank">Open in Steam</a>
-      </div>
-    </div>
   </div>
 </div>
 
 <script>
-  let allGames = [];
-  let currentStatusFilter = 'all';
-  let pickerFilters = { status: 'uncompleted', ach: 'any' };
-  let pickedGame = null;
-  let scanPoll = null;
+// =====================================================================
+//  SHARED STATE
+// =====================================================================
+let allGames = [];
+let currentStatusFilter = 'all';
+let pickerFilters = { status: 'uncompleted', ach: 'any' };
+let pickedGame = null;
+let scanPoll = null;
 
-  // ---- Tabs ----
-  function switchTab(name) {
-    document.querySelectorAll('.tab').forEach((t, i) => {
-      t.classList.toggle('active', ['library', 'picker'][i] === name);
-    });
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
+// =====================================================================
+//  TABS
+// =====================================================================
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t, i) =>
+    t.classList.toggle('active', ['library','picker'][i] === name));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// =====================================================================
+//  HELPERS
+// =====================================================================
+function formatPlaytime(mins) {
+  if (!mins) return 'Never played';
+  if (mins < 60) return mins + ' min';
+  return (mins / 60).toFixed(1) + ' hrs';
+}
+function gameStatus(g) {
+  if (g.completed) return 'completed';
+  if (g.playtime_forever > 0) return 'in_progress';
+  return 'not_started';
+}
+function achPct(g) {
+  if (!g.achievements || g.achievements.error || g.achievements.total === 0) return null;
+  return Math.round(g.achievements.unlocked / g.achievements.total * 100);
+}
+
+// =====================================================================
+//  LIBRARY TAB
+// =====================================================================
+function cardHTML(g) {
+  const st  = gameStatus(g);
+  const pct = achPct(g);
+  const cover = `https://cdn.akamai.steamstatic.com/steam/apps/${g.appid}/header.jpg`;
+  const statusLabel = { completed:'Completed', in_progress:'In Progress', not_started:'Not Started' }[st];
+  const statusCls   = { completed:'s-completed', in_progress:'s-in-progress', not_started:'s-not-started' }[st];
+  const cardCls     = { completed:'completed', in_progress:'in-progress', not_started:'' }[st];
+
+  let achHTML = '';
+  if (pct !== null) {
+    achHTML = `<div class="ach-bar"><div class="ach-bar-fill ${pct===100?'done':''}" style="width:${pct}%"></div></div>
+               <div class="ach-text">${g.achievements.unlocked}/${g.achievements.total} achievements (${pct}%)</div>`;
+  } else if (g.has_community_visible_stats) {
+    achHTML = `<div class="ach-text">Achievements not yet scanned</div>`;
   }
 
-  // ---- Helpers ----
-  function formatPlaytime(mins) {
-    if (!mins) return 'Never played';
-    if (mins < 60) return mins + ' min';
-    return (mins / 60).toFixed(1) + ' hrs';
-  }
+  const completeBtn = st === 'completed'
+    ? `<button class="btn btn-red btn-sm" onclick="toggleComplete(${g.appid},false)">Unmark</button>`
+    : `<button class="btn btn-green btn-sm" onclick="toggleComplete(${g.appid},true)">Mark Complete</button>`;
 
-  function gameStatus(g) {
-    if (g.completed) return 'completed';
-    if (g.playtime_forever > 0) return 'in_progress';
-    return 'not_started';
-  }
+  return `
+    <div class="game-card ${cardCls}" id="card-${g.appid}">
+      <img class="game-cover" src="${cover}" alt="${g.name}"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="game-cover-placeholder">${g.name}</div>
+      <div class="game-info">
+        <div class="game-name" title="${g.name}">${g.name}</div>
+        <div class="game-meta">
+          <span class="game-playtime">${formatPlaytime(g.playtime_forever)}</span>
+          <span class="game-status ${statusCls}">${statusLabel}</span>
+        </div>
+        ${achHTML}
+        <div class="game-actions">${completeBtn}</div>
+      </div>
+    </div>`;
+}
 
-  function achPct(g) {
-    if (!g.achievements || g.achievements.error || g.achievements.total === 0) return null;
-    return Math.round((g.achievements.unlocked / g.achievements.total) * 100);
-  }
+function setStatusFilter(s) {
+  currentStatusFilter = s;
+  document.querySelectorAll('#statusFilter .filter-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.s === s));
+  applyFilters();
+}
 
-  // ---- Game card ----
-  function cardHTML(g) {
+function applyFilters() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const sort   = document.getElementById('sortSelect').value;
+
+  let games = allGames.filter(g => {
+    if (search && !g.name.toLowerCase().includes(search)) return false;
     const st = gameStatus(g);
-    const pct = achPct(g);
-    const cover = `https://cdn.akamai.steamstatic.com/steam/apps/${g.appid}/header.jpg`;
+    if (currentStatusFilter !== 'all' && st !== currentStatusFilter) return false;
+    return true;
+  });
 
-    const statusLabel = { completed: 'Completed', in_progress: 'In Progress', not_started: 'Not Started' }[st];
-    const statusCls   = { completed: 's-completed', in_progress: 's-in-progress', not_started: 's-not-started' }[st];
-    const cardCls     = { completed: 'completed', in_progress: 'in-progress', not_started: '' }[st];
+  games.sort((a, b) => {
+    if (sort === 'name')          return a.name.localeCompare(b.name);
+    if (sort === 'playtime_desc') return (b.playtime_forever||0) - (a.playtime_forever||0);
+    if (sort === 'playtime_asc')  return (a.playtime_forever||0) - (b.playtime_forever||0);
+    if (sort === 'ach_desc')      return (achPct(b)??-1) - (achPct(a)??-1);
+    return 0;
+  });
 
-    let achHTML = '';
-    if (pct !== null) {
-      achHTML = `
-        <div class="ach-bar"><div class="ach-bar-fill ${pct === 100 ? 'done' : ''}" style="width:${pct}%"></div></div>
-        <div class="ach-text">${g.achievements.unlocked}/${g.achievements.total} achievements (${pct}%)</div>`;
-    } else if (g.has_community_visible_stats) {
-      achHTML = `<div class="ach-text">Achievements not yet scanned</div>`;
+  const grid = document.getElementById('gameGrid');
+  grid.innerHTML = games.length
+    ? games.map(cardHTML).join('')
+    : `<div class="empty-state"><h2>No matches</h2><p>Try adjusting the search or filter.</p></div>`;
+}
+
+function updateStats() {
+  const total      = allGames.length;
+  const completed  = allGames.filter(g => g.completed).length;
+  const inProgress = allGames.filter(g => !g.completed && g.playtime_forever > 0).length;
+  const notStarted = allGames.filter(g => !g.completed && !g.playtime_forever).length;
+  const scanned    = allGames.filter(g => g.achievements && !g.achievements.error).length;
+  document.getElementById('sTotal').textContent      = total;
+  document.getElementById('sCompleted').textContent  = completed;
+  document.getElementById('sInProgress').textContent = inProgress;
+  document.getElementById('sNotStarted').textContent = notStarted;
+  document.getElementById('sScanned').textContent    = total ? `${scanned} / ${total}` : '—';
+}
+
+async function loadState() {
+  const res  = await fetch('/api/state');
+  const data = await res.json();
+  allGames   = data.games || [];
+  if (data.libraryFetchedAt) {
+    document.getElementById('lastSynced').textContent =
+      'Last synced: ' + new Date(data.libraryFetchedAt).toLocaleString();
+  }
+  if (!data.steamConfigured) showAlert('STEAM_API_KEY and STEAM_ID are not set.', 'error');
+  updateStats();
+  applyFilters();
+  updateEligible();
+  updateScanUI(data.scanState);
+}
+
+async function syncLibrary() {
+  const btn = document.getElementById('syncBtn');
+  btn.disabled = true; btn.textContent = 'Syncing…';
+  try {
+    const res  = await fetch('/api/sync', { method: 'POST' });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+    showAlert(`Library synced — ${data.count} games found.`, 'success');
+    await loadState();
+  } catch (e) {
+    showAlert('Sync failed: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Sync Library';
+  }
+}
+
+async function toggleComplete(appid, completed) {
+  try {
+    const res  = await fetch('/api/complete', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ appid, completed })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+    await loadState();
+  } catch (e) {
+    showAlert('Error: ' + e.message, 'error');
+  }
+}
+
+// Achievement scan
+async function startScan() {
+  const res  = await fetch('/api/scan-achievements', { method: 'POST' });
+  const data = await res.json();
+  if (!data.ok) { showAlert(data.error, 'error'); return; }
+  startScanPoll();
+}
+async function stopScan() {
+  await fetch('/api/scan-stop', { method: 'POST' });
+  stopScanPoll();
+  await loadState();
+}
+function startScanPoll() {
+  if (scanPoll) return;
+  scanPoll = setInterval(async () => {
+    const res  = await fetch('/api/scan-progress');
+    const data = await res.json();
+    updateScanUI(data);
+    if (!data.running) { stopScanPoll(); await loadState(); }
+  }, 1000);
+}
+function stopScanPoll() {
+  if (scanPoll) { clearInterval(scanPoll); scanPoll = null; }
+  document.getElementById('scanProgress').classList.remove('visible');
+  document.getElementById('stopScanBtn').style.display = 'none';
+  document.getElementById('scanBtn').style.display     = '';
+}
+function updateScanUI(s) {
+  if (!s) return;
+  if (s.running) {
+    document.getElementById('scanProgress').classList.add('visible');
+    document.getElementById('stopScanBtn').style.display = '';
+    document.getElementById('scanBtn').style.display     = 'none';
+    const pct = s.total > 0 ? Math.round(s.done / s.total * 100) : 0;
+    document.getElementById('scanFill').style.width    = pct + '%';
+    document.getElementById('scanCount').textContent   = `${s.done} / ${s.total}`;
+    document.getElementById('scanCurrent').textContent = s.current ? `— ${s.current}` : '';
+    if (!scanPoll) startScanPoll();
+  } else {
+    stopScanPoll();
+  }
+}
+
+function showAlert(msg, type) {
+  const box = document.getElementById('alertBox');
+  box.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+  if (type !== 'error') setTimeout(() => { box.innerHTML = ''; }, 5000);
+}
+
+// =====================================================================
+//  WHEEL — STATE
+// =====================================================================
+const PI2 = Math.PI * 2;
+const WHEEL_COLORS = [
+  '#c0392b','#1a5276','#1a7a4a','#7d3c98',
+  '#d35400','#117a65','#b7950b','#1f618d',
+  '#6c3483','#922b21','#2c7873','#1e8bc3',
+];
+
+let wheelSegments  = [];   // game objects shown on wheel
+let wheelRotation  = 0;    // current rotation (radians, increases clockwise)
+let wheelSpinning  = false;
+let lastTickSeg    = -1;
+let audioCtx       = null;
+let spinMasterGain = null;
+let speenAudio     = null;
+
+// =====================================================================
+//  WHEEL — AUDIO
+// =====================================================================
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function playTick(velocity) {
+  const ctx  = getAudioCtx();
+  const freq = 300 + Math.min(1, velocity) * 700;   // 300–1000 Hz based on speed
+  const dur  = 0.07;
+  const t    = ctx.currentTime;
+
+  const osc  = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.type = 'triangle';
+  osc.frequency.setValueAtTime(freq, t);
+  osc.frequency.exponentialRampToValueAtTime(freq * 0.4, t + dur);
+
+  gain.gain.setValueAtTime(0.28, t);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+
+  osc.start(t);
+  osc.stop(t + dur);
+}
+
+function startSpinJingle(durationMs) {
+  if (!speenAudio) speenAudio = new Audio('/sounds/speen.mp3');
+  speenAudio.currentTime = 0;
+  speenAudio.play().catch(() => {});
+
+  const startJingle = (remainingMs) => {
+    const ctx  = getAudioCtx();
+    const now  = ctx.currentTime;
+    const dur  = remainingMs / 1000;
+
+    spinMasterGain = ctx.createGain();
+    spinMasterGain.gain.setValueAtTime(0.10, now);
+    spinMasterGain.gain.setValueAtTime(0.10, now + dur - 0.8);
+    spinMasterGain.gain.linearRampToValueAtTime(0, now + dur);
+    spinMasterGain.connect(ctx.destination);
+
+    const melody = [
+      523.25, 659.25, 783.99, 659.25,
+      587.33, 739.99, 880.00, 739.99,
+      523.25, 659.25, 783.99, 1046.50,
+      880.00, 783.99, 659.25, 523.25,
+    ];
+    const beatTime = 0.14;
+    let t = 0, idx = 0;
+    while (t < dur) {
+      const freq = melody[idx % melody.length];
+      const noteTime = now + t;
+      const osc  = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(spinMasterGain);
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(freq, noteTime);
+      gain.gain.setValueAtTime(0, noteTime);
+      gain.gain.linearRampToValueAtTime(0.5, noteTime + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.001, noteTime + beatTime * 0.75);
+      osc.start(noteTime);
+      osc.stop(noteTime + beatTime);
+      t += beatTime;
+      idx++;
+    }
+  };
+
+  const spinStart = performance.now();
+  speenAudio.addEventListener('ended', () => {
+    const elapsed = performance.now() - spinStart;
+    const remaining = durationMs - elapsed;
+    if (remaining > 200) startJingle(remaining);
+  }, { once: true });
+}
+
+function playFanfare() {
+  const ctx = getAudioCtx();
+  const now = ctx.currentTime;
+
+  function note(freq, start, dur, type, vol) {
+    const osc  = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, now + start);
+    gain.gain.setValueAtTime(0, now + start);
+    gain.gain.linearRampToValueAtTime(vol, now + start + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + start + dur);
+    osc.start(now + start);
+    osc.stop(now + start + dur);
+  }
+
+  // Quick ascending arpeggio
+  note(523.25, 0.00, 0.25, 'triangle', 0.20);  // C5
+  note(659.25, 0.10, 0.25, 'triangle', 0.20);  // E5
+  note(783.99, 0.20, 0.25, 'triangle', 0.20);  // G5
+  note(1046.50,0.30, 0.55, 'triangle', 0.22);  // C6
+
+  // Chord swell
+  [523.25, 659.25, 783.99, 1046.50].forEach(f =>
+    note(f, 0.40, 1.1, 'sine', 0.14));
+
+  // Cymbal-like noise burst
+  const buf  = ctx.createBuffer(1, ctx.sampleRate * 0.3, ctx.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1);
+  const src  = ctx.createBufferSource();
+  const filt = ctx.createBiquadFilter();
+  const gn   = ctx.createGain();
+  src.buffer  = buf;
+  filt.type   = 'highpass';
+  filt.frequency.value = 6000;
+  src.connect(filt); filt.connect(gn); gn.connect(ctx.destination);
+  gn.gain.setValueAtTime(0.18, now + 0.38);
+  gn.gain.exponentialRampToValueAtTime(0.001, now + 0.68);
+  src.start(now + 0.38);
+}
+
+// =====================================================================
+//  WHEEL — DRAWING
+// =====================================================================
+function drawWheel(rotation) {
+  const canvas = document.getElementById('wheelCanvas');
+  const ctx    = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2 + 10;   // shift center down slightly for pointer room
+  const r  = Math.min(cx, cy) - 24;
+  const n  = wheelSegments.length;
+
+  ctx.clearRect(0, 0, W, H);
+
+  if (n === 0) {
+    // Idle decorative wheel
+    const idleN = 8;
+    const sa = PI2 / idleN;
+    for (let i = 0; i < idleN; i++) {
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, rotation - Math.PI / 2 + i * sa, rotation - Math.PI / 2 + (i + 1) * sa);
+      ctx.closePath();
+      ctx.fillStyle = WHEEL_COLORS[i % WHEEL_COLORS.length];
+      ctx.fill();
+      ctx.strokeStyle = '#0d1f2e';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+    // Center text
+    ctx.fillStyle = 'rgba(22,32,45,0.75)';
+    ctx.beginPath(); ctx.arc(cx, cy, 80, 0, PI2); ctx.fill();
+    ctx.fillStyle = '#66c0f4';
+    ctx.font = 'bold 15px Segoe UI';
+    ctx.textAlign = 'center';
+    ctx.fillText('Sync library &', cx, cy - 8);
+    ctx.fillText('press Spin!', cx, cy + 12);
+  } else {
+    const sa = PI2 / n;
+    for (let i = 0; i < n; i++) {
+      const start = rotation - Math.PI / 2 + i * sa;
+      const end   = start + sa;
+      const mid   = (start + end) / 2;
+
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, start, end);
+      ctx.closePath();
+      ctx.fillStyle = WHEEL_COLORS[i % WHEEL_COLORS.length];
+      ctx.fill();
+      ctx.strokeStyle = '#0d1f2e';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Game name text
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(mid);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#ffffff';
+      const fontSize = Math.min(13, Math.max(8, 300 / n));
+      ctx.font = `bold ${fontSize}px Segoe UI`;
+      const maxCh = Math.max(6, Math.floor(22 - n * 0.4));
+      const nm = wheelSegments[i].name;
+      ctx.fillText(nm.length > maxCh ? nm.slice(0, maxCh - 1) + '…' : nm, r - 10, fontSize / 3);
+      ctx.restore();
+    }
+  }
+
+  // Outer ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, PI2);
+  ctx.strokeStyle = '#66c0f4';
+  ctx.lineWidth = 4;
+  ctx.stroke();
+
+  // Center hub
+  ctx.beginPath();
+  ctx.arc(cx, cy, 16, 0, PI2);
+  ctx.fillStyle = '#1b2838';
+  ctx.fill();
+  ctx.strokeStyle = '#66c0f4';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Pointer — downward triangle at top center pointing to wheel rim
+  const px = cx;
+  const py = cy - r - 2;  // tip at wheel rim
+  ctx.beginPath();
+  ctx.moveTo(px,      py);
+  ctx.lineTo(px - 13, py - 22);
+  ctx.lineTo(px + 13, py - 22);
+  ctx.closePath();
+  ctx.fillStyle = '#66c0f4';
+  ctx.fill();
+  ctx.strokeStyle = '#0d1f2e';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+}
+
+// Segment currently under the top pointer
+function getPointerSeg(rotation) {
+  const n = wheelSegments.length;
+  if (n === 0) return -1;
+  const sa   = PI2 / n;
+  // Top = angle -π/2 in canvas → local position = (-π/2 - rotation + π/2) = -rotation
+  const norm = ((-rotation % PI2) + PI2) % PI2;
+  return Math.floor(norm / sa) % n;
+}
+
+// =====================================================================
+//  WHEEL — SPIN ANIMATION
+// =====================================================================
+function doSpin(winnerIdx, spinDuration) {
+  const n  = wheelSegments.length;
+  const sa = PI2 / n;
+
+  // We want getPointerSeg(endRotation) === winnerIdx
+  // i.e. -endRotation mod PI2 ∈ [winnerIdx*sa, (winnerIdx+1)*sa)
+  // Centre of winner slot → offset = sa/2 + slight random nudge
+  const nudge      = (Math.random() - 0.5) * sa * 0.5;
+  const targetMod  = (( -(winnerIdx * sa + sa / 2 + nudge) ) % PI2 + PI2) % PI2;
+  const currentMod = ((wheelRotation % PI2) + PI2) % PI2;
+
+  let delta = (targetMod - currentMod + PI2) % PI2;
+  if (delta < 0.2) delta += PI2;
+  delta += 5 * PI2;   // at least 5 full spins
+
+  const startRot  = wheelRotation;
+  const endRot    = startRot + delta;
+  const startTime = performance.now();
+
+  // Start jingle
+  startSpinJingle(spinDuration);
+
+  function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
+
+  function frame(now) {
+    const t     = Math.min((now - startTime) / spinDuration, 1);
+    const eased = easeOut(t);
+    const vel   = 1 - t;  // 1=fast, 0=stopped
+
+    wheelRotation = startRot + (endRot - startRot) * eased;
+
+    // Tick when segment changes
+    const seg = getPointerSeg(wheelRotation);
+    if (seg !== lastTickSeg) {
+      playTick(vel);
+      lastTickSeg = seg;
     }
 
-    const completeBtn = st === 'completed'
-      ? `<button class="btn btn-red btn-sm" onclick="toggleComplete(${g.appid},false)">Unmark</button>`
-      : `<button class="btn btn-green btn-sm" onclick="toggleComplete(${g.appid},true)">Mark Complete</button>`;
+    drawWheel(wheelRotation);
 
-    return `
-      <div class="game-card ${cardCls}" id="card-${g.appid}">
-        <div class="game-cover-wrap">
-          <img class="game-cover" src="${cover}" alt="${g.name}"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="game-cover-placeholder">${g.name}</div>
-        </div>
-        <div class="game-info">
-          <div class="game-name" title="${g.name}">${g.name}</div>
-          <div class="game-meta">
-            <span class="game-playtime">${formatPlaytime(g.playtime_forever)}</span>
-            <span class="game-status ${statusCls}">${statusLabel}</span>
-          </div>
-          ${achHTML}
-          <div class="game-actions">${completeBtn}</div>
-        </div>
+    if (t < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      wheelSpinning = false;
+      document.getElementById('spinBtn').disabled    = false;
+      document.getElementById('spinBtn').textContent = 'Spin Again!';
+      playFanfare();
+      showPickResult(wheelSegments[winnerIdx]);
+    }
+  }
+
+  requestAnimationFrame(frame);
+}
+
+// =====================================================================
+//  WHEEL — TRIGGER
+// =====================================================================
+function getFilteredGames() {
+  const minH = parseFloat(document.getElementById('minPt').value) || 0;
+  const maxH = parseFloat(document.getElementById('maxPt').value) || Infinity;
+  const st   = pickerFilters.status;
+  const ach  = pickerFilters.ach;
+
+  return allGames.filter(g => {
+    if (g.completed) return false;
+    if (st === 'not_started' && g.playtime_forever !== 0) return false;
+    if (st === 'in_progress' && g.playtime_forever === 0) return false;
+    const hrs = g.playtime_forever / 60;
+    if (hrs < minH) return false;
+    if (maxH !== Infinity && hrs > maxH) return false;
+    if (ach === 'yes' && !g.has_community_visible_stats) return false;
+    if (ach === 'no'  &&  g.has_community_visible_stats) return false;
+    return true;
+  });
+}
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+function updateEligible() {
+  const n = getFilteredGames().length;
+  document.getElementById('pickEligible').textContent =
+    n ? `${n} eligible game${n !== 1 ? 's' : ''}` : 'No eligible games';
+}
+
+async function triggerSpin() {
+  if (wheelSpinning) return;
+
+  // Resume audio after user gesture
+  getAudioCtx();
+
+  const params = new URLSearchParams({ status: pickerFilters.status });
+  const minPt  = document.getElementById('minPt').value;
+  const maxPt  = document.getElementById('maxPt').value;
+  if (minPt) params.set('minPlaytime', minPt);
+  if (maxPt) params.set('maxPlaytime', maxPt);
+  if (pickerFilters.ach !== 'any') params.set('hasAchievements', pickerFilters.ach);
+
+  const res  = await fetch('/api/random?' + params);
+  const data = await res.json();
+
+  if (!data.game) {
+    document.getElementById('pickEligible').textContent = 'No games match your filters.';
+    drawWheel(wheelRotation);  // redraw idle state
+    return;
+  }
+
+  // Build wheel segments: winner + up to 11 others
+  const eligible   = getFilteredGames();
+  const winner     = data.game;
+  const others     = eligible.filter(g => g.appid !== winner.appid);
+  shuffleArray(others);
+  const segments   = [winner, ...others.slice(0, 11)];
+  shuffleArray(segments);
+
+  wheelSegments = segments;
+  lastTickSeg   = -1;
+  const winnerIdx = segments.findIndex(g => g.appid === winner.appid);
+
+  document.getElementById('pickEligible').textContent    = `${data.totalEligible} eligible games`;
+  document.getElementById('spinBtn').disabled            = true;
+  document.getElementById('spinBtn').textContent         = 'Spinning…';
+  document.getElementById('pickResult').classList.remove('visible');
+
+  wheelSpinning = true;
+  const spinDuration = 6200 + Math.random() * 1200;
+  doSpin(winnerIdx, spinDuration);
+}
+
+function showPickResult(game) {
+  pickedGame = game;
+  document.getElementById('pickCover').src  = `https://cdn.akamai.steamstatic.com/steam/apps/${game.appid}/header.jpg`;
+  document.getElementById('pickCover').style.display = 'block';
+  document.getElementById('pickName').textContent    = game.name;
+
+  const pct    = achPct(game);
+  const achTxt = pct !== null
+    ? `${game.achievements.unlocked}/${game.achievements.total} achievements (${pct}%)`
+    : '';
+  document.getElementById('pickMeta').innerHTML =
+    `<span>${formatPlaytime(game.playtime_forever)}</span>${achTxt ? `<span>${achTxt}</span>` : ''}`;
+
+  document.getElementById('pickLink').href        = `steam://store/${game.appid}`;
+  const cb = document.getElementById('pickComplete');
+  cb.textContent = 'Mark Complete';
+  cb.disabled    = false;
+
+  document.getElementById('pickResult').classList.add('visible');
+}
+
+async function markPickComplete() {
+  if (!pickedGame) return;
+  await toggleComplete(pickedGame.appid, true);
+  const btn = document.getElementById('pickComplete');
+  btn.textContent = 'Marked!';
+  btn.disabled    = true;
+}
+
+// =====================================================================
+//  PICKER FILTER BUTTONS
+// =====================================================================
+function setPF(type, val) {
+  pickerFilters[type] = val;
+  const id = type === 'status' ? 'pickerStatus' : 'pickerAch';
+  document.querySelectorAll(`#${id} .filter-btn`).forEach(b =>
+    b.classList.toggle('active', b.dataset.v === val));
+  updateEligible();
+}
+
+// =====================================================================
+//  INIT
+// =====================================================================
+loadState().then(() => {
+  if (allGames.length === 0) {
+    document.getElementById('gameGrid').innerHTML = `
+      <div class="empty-state">
+        <h2>No games loaded yet</h2>
+        <p>Click <strong>Sync Library</strong> to pull your Steam library.</p>
+        <button class="btn" onclick="syncLibrary()">Sync Library</button>
       </div>`;
   }
+  drawWheel(wheelRotation); // idle wheel on load
 
-  // ---- Status filter ----
-  function setStatusFilter(s) {
-    currentStatusFilter = s;
-    document.querySelectorAll('#statusFilter .filter-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.s === s);
-    });
-    applyFilters();
-  }
-
-  // ---- Picker filter ----
-  function setPF(type, val) {
-    pickerFilters[type] = val;
-    const id = type === 'status' ? 'pickerStatus' : 'pickerAch';
-    document.querySelectorAll(`#${id} .filter-btn`).forEach(b => {
-      b.classList.toggle('active', b.dataset.v === val);
-    });
-  }
-
-  // ---- Apply filters + sort ----
-  function applyFilters() {
-    const search = document.getElementById('searchInput').value.toLowerCase();
-    const sort   = document.getElementById('sortSelect').value;
-
-    let games = allGames.filter(g => {
-      if (search && !g.name.toLowerCase().includes(search)) return false;
-      const st = gameStatus(g);
-      if (currentStatusFilter !== 'all' && st !== currentStatusFilter) return false;
-      return true;
-    });
-
-    games.sort((a, b) => {
-      if (sort === 'name')         return a.name.localeCompare(b.name);
-      if (sort === 'playtime_desc') return (b.playtime_forever || 0) - (a.playtime_forever || 0);
-      if (sort === 'playtime_asc')  return (a.playtime_forever || 0) - (b.playtime_forever || 0);
-      if (sort === 'ach_desc') {
-        const pa = achPct(a) ?? -1, pb = achPct(b) ?? -1;
-        return pb - pa;
-      }
-      return 0;
-    });
-
-    const grid = document.getElementById('gameGrid');
-    if (games.length === 0) {
-      grid.innerHTML = `<div class="empty-state"><h2>No matches</h2><p>Try adjusting the search or filter.</p></div>`;
-    } else {
-      grid.innerHTML = games.map(cardHTML).join('');
+  // Slowly rotate idle wheel for decoration
+  let idleRot = 0;
+  function idleSpin() {
+    if (!wheelSpinning && wheelSegments.length === 0) {
+      idleRot += 0.003;
+      wheelRotation = idleRot;
+      drawWheel(idleRot);
     }
+    requestAnimationFrame(idleSpin);
   }
-
-  // ---- Stats ----
-  function updateStats() {
-    const total      = allGames.length;
-    const completed  = allGames.filter(g => g.completed).length;
-    const inProgress = allGames.filter(g => !g.completed && g.playtime_forever > 0).length;
-    const notStarted = allGames.filter(g => !g.completed && !g.playtime_forever).length;
-    const scanned    = allGames.filter(g => g.achievements && !g.achievements.error).length;
-
-    document.getElementById('sTotal').textContent      = total;
-    document.getElementById('sCompleted').textContent  = completed;
-    document.getElementById('sInProgress').textContent = inProgress;
-    document.getElementById('sNotStarted').textContent = notStarted;
-    document.getElementById('sScanned').textContent    = total ? `${scanned} / ${total}` : '—';
-  }
-
-  // ---- Load state ----
-  async function loadState() {
-    const res  = await fetch('/api/state');
-    const data = await res.json();
-    allGames   = data.games || [];
-
-    if (data.libraryFetchedAt) {
-      document.getElementById('lastSynced').textContent =
-        'Last synced: ' + new Date(data.libraryFetchedAt).toLocaleString();
-    }
-
-    if (!data.steamConfigured) {
-      showAlert('STEAM_API_KEY and STEAM_ID are not set in the service environment.', 'error');
-    }
-
-    updateStats();
-    applyFilters();
-    updateScanUI(data.scanState);
-  }
-
-  // ---- Sync library ----
-  async function syncLibrary() {
-    const btn = document.getElementById('syncBtn');
-    btn.disabled = true; btn.textContent = 'Syncing…';
-    try {
-      const res  = await fetch('/api/sync', { method: 'POST' });
-      const data = await res.json();
-      if (!data.ok) throw new Error(data.error);
-      showAlert(`Library synced — ${data.count} games found.`, 'success');
-      await loadState();
-    } catch (e) {
-      showAlert('Sync failed: ' + e.message, 'error');
-    } finally {
-      btn.disabled = false; btn.textContent = 'Sync Library';
-    }
-  }
-
-  // ---- Toggle complete ----
-  async function toggleComplete(appid, completed) {
-    try {
-      const res  = await fetch('/api/complete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ appid, completed })
-      });
-      const data = await res.json();
-      if (!data.ok) throw new Error(data.error);
-      await loadState();
-    } catch (e) {
-      showAlert('Error: ' + e.message, 'error');
-    }
-  }
-
-  // ---- Achievement scan ----
-  async function startScan() {
-    const res  = await fetch('/api/scan-achievements', { method: 'POST' });
-    const data = await res.json();
-    if (!data.ok) { showAlert(data.error, 'error'); return; }
-    startScanPoll();
-  }
-
-  async function stopScan() {
-    await fetch('/api/scan-stop', { method: 'POST' });
-    stopScanPoll();
-    await loadState();
-  }
-
-  function startScanPoll() {
-    if (scanPoll) return;
-    scanPoll = setInterval(async () => {
-      const res  = await fetch('/api/scan-progress');
-      const data = await res.json();
-      updateScanUI(data);
-      if (!data.running) { stopScanPoll(); await loadState(); }
-    }, 1000);
-  }
-
-  function stopScanPoll() {
-    if (scanPoll) { clearInterval(scanPoll); scanPoll = null; }
-    document.getElementById('scanProgress').classList.remove('visible');
-    document.getElementById('stopScanBtn').style.display = 'none';
-    document.getElementById('scanBtn').style.display     = '';
-  }
-
-  function updateScanUI(s) {
-    if (!s) return;
-    if (s.running) {
-      document.getElementById('scanProgress').classList.add('visible');
-      document.getElementById('stopScanBtn').style.display = '';
-      document.getElementById('scanBtn').style.display     = 'none';
-      const pct = s.total > 0 ? Math.round(s.done / s.total * 100) : 0;
-      document.getElementById('scanFill').style.width    = pct + '%';
-      document.getElementById('scanCount').textContent   = `${s.done} / ${s.total}`;
-      document.getElementById('scanCurrent').textContent = s.current ? `— ${s.current}` : '';
-      if (!scanPoll) startScanPoll();
-    } else {
-      stopScanPoll();
-    }
-  }
-
-  // ---- Random picker ----
-  async function pickRandom() {
-    const params = new URLSearchParams({ status: pickerFilters.status });
-    const minPt = document.getElementById('minPt').value;
-    const maxPt = document.getElementById('maxPt').value;
-    if (minPt) params.set('minPlaytime', minPt);
-    if (maxPt) params.set('maxPlaytime', maxPt);
-    if (pickerFilters.ach !== 'any') params.set('hasAchievements', pickerFilters.ach);
-
-    const res  = await fetch('/api/random?' + params);
-    const data = await res.json();
-    const el   = document.getElementById('pickResult');
-
-    if (!data.game) {
-      document.getElementById('pickEligible').textContent = 'No games match your filters.';
-      el.classList.remove('visible');
-      return;
-    }
-
-    pickedGame = data.game;
-    document.getElementById('pickEligible').textContent = `${data.totalEligible} eligible games`;
-    document.getElementById('pickCover').src  = `https://cdn.akamai.steamstatic.com/steam/apps/${data.game.appid}/header.jpg`;
-    document.getElementById('pickName').textContent = data.game.name;
-
-    const pct    = achPct(data.game);
-    const achTxt = pct !== null ? `${data.game.achievements.unlocked}/${data.game.achievements.total} achievements (${pct}%)` : '';
-    document.getElementById('pickMeta').innerHTML =
-      `<span>${formatPlaytime(data.game.playtime_forever)}</span>${achTxt ? `<span>${achTxt}</span>` : ''}`;
-
-    document.getElementById('pickLink').href = `steam://store/${data.game.appid}`;
-
-    const completeBtn = document.getElementById('pickComplete');
-    completeBtn.textContent = 'Mark Complete';
-    completeBtn.disabled    = false;
-
-    el.classList.add('visible');
-  }
-
-  async function markPickComplete() {
-    if (!pickedGame) return;
-    await toggleComplete(pickedGame.appid, true);
-    const btn = document.getElementById('pickComplete');
-    btn.textContent = 'Marked!';
-    btn.disabled    = true;
-  }
-
-  // ---- Alert ----
-  function showAlert(msg, type) {
-    const box = document.getElementById('alertBox');
-    box.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
-    if (type !== 'error') setTimeout(() => { box.innerHTML = ''; }, 5000);
-  }
-
-  // ---- Init ----
-  loadState().then(() => {
-    if (allGames.length === 0) {
-      document.getElementById('gameGrid').innerHTML = `
-        <div class="empty-state">
-          <h2>No games loaded yet</h2>
-          <p>Click <strong>Sync Library</strong> to pull your Steam library.</p>
-          <button class="btn" onclick="syncLibrary()">Sync Library</button>
-        </div>`;
-    }
-  });
+  idleSpin();
+});
 </script>
 </body>
 </html>

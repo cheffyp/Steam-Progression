@@ -183,6 +183,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/sounds', express.static(path.join(__dirname, 'data/sounds')));
 
 // ----- State -----
 app.get('/api/state', (req, res) => {
